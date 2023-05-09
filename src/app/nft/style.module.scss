@@ -1,0 +1,72 @@
+.container {
+  font-family: Arial, sans-serif;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  position: relative;
+}
+
+.connectWallet {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+.title {
+  font-size: 24px;
+  margin: 10px 0;
+}
+
+.subtitle {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 20px 0;
+}
+
+.info {
+  font-size: 16px;
+  line-height: 1.6;
+
+  p {
+    margin: 5px 0;
+  }
+}
+
+.mint {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+
+  input {
+    font-size: 16px;
+    width: 80px;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+
+  button {
+    font-size: 16px;
+    padding: 8px 16px;
+    cursor: pointer;
+    background-color: #4caf50;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: #3d8d40;
+    }
+  }
+
+  .remaining {
+    font-size: 14px;
+    margin-top: 10px;
+  }
+}
