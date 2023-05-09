@@ -1,6 +1,6 @@
 "use client"; // this is a client component 👈🏽
 import { useEffect, useState, useRef } from 'react';
-import { Contract, ethers, providers } from 'ethers';
+import { Contract, ethers } from 'ethers';
 import { BarbecureNFTAddress, BarbecureNFTABI } from '@/constants';
 import { useConnectWallet } from '@/useHooks/useConnectWallet';
 import styles from './style.module.scss';
@@ -34,9 +34,18 @@ function HomePage() {
       let balance = await contract.getNFTBalance();
       balance = balance.toString();
       setNftBalance(balance);
-      console.log(balance.toString());
     } catch (err) {
       // console.log(err)
+    }
+  }
+
+  const withdraw = async () => {
+    try {
+      const signer = await getProviderOrSigner(true);
+      const contract = new Contract(BarbecureNFTAddress, BarbecureNFTABI, signer);
+      await contract.withdraw();
+    } catch (err) {
+      console.log(err)
     }
   }
 
@@ -64,6 +73,7 @@ function HomePage() {
         <button onClick={mintNFT}>mint your nft</button>
         <p className={styles.remaining}>Remaining NFTs available for minting: {nftBalance}</p>
       </div>
+      {/* <button onClick={withdraw}>withdraw</button> */}
     </div>
   );
 }

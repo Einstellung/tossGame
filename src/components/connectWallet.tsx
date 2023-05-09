@@ -1,4 +1,3 @@
-"use client"; // this is a client component 👈🏽
 import { useConnectWallet } from '@/useHooks/useConnectWallet';
 import styles from "./style.module.scss"
 
