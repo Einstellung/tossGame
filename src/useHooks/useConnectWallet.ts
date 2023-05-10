@@ -1,5 +1,5 @@
 import { providers } from "ethers/lib/ethers";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Web3Modal from "web3modal";
 
 type returnType = [

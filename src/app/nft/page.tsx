@@ -5,6 +5,7 @@ import { BarbecueNFTAddress, BarbecueNFTABI } from '@/constants';
 import { useConnectWallet } from '@/useHooks/useConnectWallet';
 import styles from './style.module.scss';
 import { ConnectWalletComponent } from '@/components/connectWallet';
+import Home from '../page';
 
 function HomePage() {
   const [walletConnected, getProviderOrSigner, connectWallet] = useConnectWallet()
@@ -56,25 +57,27 @@ function HomePage() {
   }, [])
 
   return (
-    <div className={styles.container}>
-      <div className={styles.connectWallet}>
-        <ConnectWalletComponent />
+    <Home>
+      <div className={styles.container}>
+        <div className={styles.connectWallet}>
+          <ConnectWalletComponent />
+        </div>
+        <h1 className={styles.title}>Let's mint some Barbecue NFT 🎉</h1>
+        <h1 className={styles.subtitle}>Total NFT supply is limited to 20 👀</h1>
+        <div className={styles.info}>
+          <p>If you own an NFT, you can receive a Barbecue Token airdrop</p>
+          <p>Each NFT can claim 100 Barbecue Tokens</p>
+          <p>The price of each NFT is 0.1 ETH</p>
+          <p>Each address can mint up to 2 NFTs</p>
+        </div>
+        <div className={styles.mint}>
+          <input type="number" min="0" max="2" step="1" />
+          <button onClick={mintNFT}>mint your nft</button>
+          <p className={styles.remaining}>Remaining NFTs available for minting: {nftBalance}</p>
+        </div>
+        {/* <button onClick={withdraw}>withdraw</button> */}
       </div>
-      <h1 className={styles.title}>Let's mint some Barbecue NFT 🎉</h1>
-      <h1 className={styles.subtitle}>Total NFT supply is limited to 20 👀</h1>
-      <div className={styles.info}>
-        <p>If you own an NFT, you can receive a Barbecue Token airdrop</p>
-        <p>Each NFT can claim 100 Barbecue Tokens</p>
-        <p>The price of each NFT is 0.1 ETH</p>
-        <p>Each address can mint up to 2 NFTs</p>
-      </div>
-      <div className={styles.mint}>
-        <input type="number" min="0" max="2" step="1" />
-        <button onClick={mintNFT}>mint your nft</button>
-        <p className={styles.remaining}>Remaining NFTs available for minting: {nftBalance}</p>
-      </div>
-      {/* <button onClick={withdraw}>withdraw</button> */}
-    </div>
+    </Home>
   );
 }
 

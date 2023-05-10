@@ -1,67 +1,40 @@
-import Image from 'next/image'
+"use client";
 import styles from './page.module.css'
-import React from 'react'
+import React, { Suspense } from 'react'
+import Link from 'next/link'
 
-export default function Home() {
+
+export default function Home({children}: {
+  children?: React.ReactNode
+}) {
+
   return (
     <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.tsx</code>
-        </p>
-        <div>
-          <h2>Gold/USD forcast</h2>
-        </div>
-      </div>
 
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
+      {/* {renderComponent()} */}
+      {children}
       <div className={styles.grid}>
-        <a
-          href="/nft"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+        <Link href="/nft" className={styles.card}>
           <h2>
             Mint NFT <span>-&gt;</span>
           </h2>
           <p>Mint NFT to get Barbecure token in discount price</p>
-        </a>
+        </Link>
 
-        <a
-          href="/ico"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+        <Link href="/ico" className={styles.card}>
           <h2>
             Token ICO <span>-&gt;</span>
           </h2>
           <p>Buy token using goerli eth</p>
-        </a>
+        </Link>
 
-        <a
-          href="/dex"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+        <Link href="/dex" className={styles.card}>
           <h2>
             DEX <span>-&gt;</span>
           </h2>
           <p>Decentralize exchange use Uniswap V1 AMM mechanism</p>
-        </a>
+        </Link>
+
       </div>
     </main>
   )
