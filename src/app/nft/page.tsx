@@ -1,7 +1,7 @@
 "use client"; // this is a client component 👈🏽
 import { useEffect, useState, useRef } from 'react';
 import { Contract, ethers } from 'ethers';
-import { BarbecureNFTAddress, BarbecureNFTABI } from '@/constants';
+import { BarbecueNFTAddress, BarbecueNFTABI } from '@/constants';
 import { useConnectWallet } from '@/useHooks/useConnectWallet';
 import styles from './style.module.scss';
 import { ConnectWalletComponent } from '@/components/connectWallet';
@@ -18,7 +18,7 @@ function HomePage() {
 
       // If you want to send eth to contract, you should use parseEther, then mint(value)
       const priceInWei = ethers.utils.parseEther("0.1")
-      const contract = new Contract(BarbecureNFTAddress, BarbecureNFTABI, signer);
+      const contract = new Contract(BarbecueNFTAddress, BarbecueNFTABI, signer);
       const tx = await contract.mint({value: priceInWei});
       await tx.wait();
       alert("Mint success")
@@ -30,7 +30,7 @@ function HomePage() {
   const getNFTBalance = async () => {
     try {
       const provider = await getProviderOrSigner();
-      const contract = new Contract(BarbecureNFTAddress, BarbecureNFTABI, provider);
+      const contract = new Contract(BarbecueNFTAddress, BarbecueNFTABI, provider);
       let balance = await contract.getNFTBalance();
       balance = balance.toString();
       setNftBalance(balance);
@@ -42,7 +42,7 @@ function HomePage() {
   const withdraw = async () => {
     try {
       const signer = await getProviderOrSigner(true);
-      const contract = new Contract(BarbecureNFTAddress, BarbecureNFTABI, signer);
+      const contract = new Contract(BarbecueNFTAddress, BarbecueNFTABI, signer);
       await contract.withdraw();
     } catch (err) {
       console.log(err)
@@ -60,11 +60,11 @@ function HomePage() {
       <div className={styles.connectWallet}>
         <ConnectWalletComponent />
       </div>
-      <h1 className={styles.title}>Let's mint some Barbecure NFT 🎉</h1>
+      <h1 className={styles.title}>Let's mint some Barbecue NFT 🎉</h1>
       <h1 className={styles.subtitle}>Total NFT supply is limited to 20 👀</h1>
       <div className={styles.info}>
-        <p>If you own an NFT, you can receive a Barbecure Token airdrop</p>
-        <p>Each NFT can claim 100 Barbecure Tokens</p>
+        <p>If you own an NFT, you can receive a Barbecue Token airdrop</p>
+        <p>Each NFT can claim 100 Barbecue Tokens</p>
         <p>The price of each NFT is 0.1 ETH</p>
         <p>Each address can mint up to 2 NFTs</p>
       </div>

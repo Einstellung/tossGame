@@ -1,5 +1,5 @@
-export const BarbecureNFTAddress = "0xaF7f5EE151164d763992a17F96E1E8Ddf14B1771";
-export const BarbecureNFTABI = [
+export const BarbecueNFTAddress = "0xaF7f5EE151164d763992a17F96E1E8Ddf14B1771";
+export const BarbecueNFTABI = [
   {
     "inputs": [],
     "stateMutability": "nonpayable",

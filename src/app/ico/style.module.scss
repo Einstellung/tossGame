@@ -1,0 +1,81 @@
+.container {
+  font-family: Arial, sans-serif;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  max-width: 70vw;
+
+  .connectWallet {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+  }
+
+  .title {
+    font-size: 24px;
+    margin: 10px 0;
+  }
+
+  .content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+
+    .info {
+      flex: 1;
+      padding-right: 30px;
+
+      .infoText {
+        font-size: 16px;
+        line-height: 1.8;
+        margin: 5px 0;
+        text-align: left;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
+
+    .image {
+      max-width: 52%;
+      height: auto;
+    }
+  }
+
+  .mint {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+
+    .button {
+      font-size: 16px;
+      padding: 8px 16px;
+      cursor: pointer;
+      background-color: #4caf50;
+      border: none;
+      border-radius: 4px;
+      color: white;
+      transition: background-color 0.3s ease;
+
+      &:hover {
+        background-color: #3d8d40;
+      }
+    }
+
+    .input[type="number"] {
+      font-size: 16px;
+      width: 80px;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+  }
+}
