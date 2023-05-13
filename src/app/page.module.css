@@ -1,3 +1,9 @@
+.connectWallet {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
 .main {
   display: flex;
   flex-direction: column;

@@ -59,9 +59,6 @@ function HomePage() {
   return (
     <Home>
       <div className={styles.container}>
-        <div className={styles.connectWallet}>
-          <ConnectWalletComponent />
-        </div>
         <h1 className={styles.title}>Let's mint some Barbecue NFT 🎉</h1>
         <h1 className={styles.subtitle}>Total NFT supply is limited to 20 👀</h1>
         <div className={styles.info}>

@@ -1,5 +1,6 @@
+import { EmitterContext } from "@/app/layout";
 import { providers } from "ethers/lib/ethers";
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import Web3Modal from "web3modal";
 
 type returnType = [
@@ -11,6 +12,7 @@ type returnType = [
 ];
 
 export const useConnectWallet = (): returnType => {
+  const emitter = useContext(EmitterContext)
   const [walletConnected, setWalletConnected] = useState(false);
   const web3ModalRef = useRef<Web3Modal | null>(null);
 
@@ -40,6 +42,8 @@ export const useConnectWallet = (): returnType => {
   };
 
   const connectWallet = async () => {
+
+    emitter?.emit("walletConnected")
 
     if (!walletConnected) {
       try {

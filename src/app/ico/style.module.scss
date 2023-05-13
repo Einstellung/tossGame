@@ -5,16 +5,10 @@
   text-align: center;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
-  min-height: 100vh;
+  min-height: 70vh;
   max-width: 70vw;
-
-  .connectWallet {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-  }
 
   .title {
     font-size: 24px;
