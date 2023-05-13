@@ -4,15 +4,18 @@ import { useConnectWallet } from "@/useHooks/useConnectWallet";
 import styles from './style.module.scss'
 import { useContext, useEffect, useState } from "react";
 import Home, { EmitterContext } from "../layout";
-import { BigNumber, Contract } from "ethers";
+import { BigNumber, Contract, Signer, utils } from "ethers";
 import { BarbecueTokenAddress, BarbecueTokenABI } from "@/constants";
 import { tokenDecimal } from "@/utils/SymbolChange";
 
 function ICO() {
-  const [ , getProviderOrSigner, ] = useConnectWallet()
+  const [, getProviderOrSigner,] = useConnectWallet()
 
   const [remainTokens, setRemainTokens] = useState("")
   const [walletConnected, setWalletConnected] = useState(false)
+
+  // const zero = BigNumber.from(0)
+  const [tokenAmount, setTokenAmount] = useState(0)
 
   const emitter = useContext(EmitterContext);
 
@@ -24,6 +27,40 @@ function ICO() {
       setRemainTokens(tokenDecimal(remainTokens));
     } catch (e) {
       console.log(e)
+    }
+  }
+
+  const claimTokens = async () => {
+    try {
+      const signer = await getProviderOrSigner(true)
+      const tokenContract = new Contract(BarbecueTokenAddress, BarbecueTokenABI, signer)
+
+      const tx = await tokenContract.claimTokens()
+      console.log("🚀 ~ file: page.tsx:39 ~ claimTokens ~ tx:", tx)
+      await tx.wait()
+      window.alert("Sucessfully claimed Barbecue Tokens");
+      await getRemainTokens()
+    } catch (err) {
+      console.log(err)
+      alert(err)
+    }
+  }
+
+  const mintTokens = async (amount: number) => {
+    try {
+      const signer = await getProviderOrSigner(true)
+      const tokenContract = new Contract(BarbecueTokenAddress, BarbecueTokenABI, signer)
+
+      const value = 0.005 * amount
+      const tx = await tokenContract.mint(amount, {
+        value: utils.parseEther(value.toString())
+      })
+      // wait for the transaction to get minted
+      await tx.wait()
+      window.alert("Successfully minted Barbecue Tokens");
+      await getRemainTokens()
+    } catch (err) {
+      alert(err)
     }
   }
 
@@ -56,10 +93,12 @@ function ICO() {
       {
         walletConnected &&
         <div className={styles.mint}>
-          <button className={styles.button}>Airdrop</button>
+          <button className={styles.button} onClick={claimTokens}>Airdrop</button>
           <div>
-            <input type="number" min="1" max="2000" step="1" className={styles.input} />
-            <button className={styles.button}>Buy</button>
+            <input type="number" min="1" max="2000" step="1" className={styles.input}
+              onChange={e => setTokenAmount(Number(e.target.value))}
+            />
+            <button className={styles.button} onClick={() => mintTokens(tokenAmount)}>Buy</button>
           </div>
         </div>
       }
