@@ -50,6 +50,7 @@
   grid-template-columns: repeat(3, minmax(25%, auto));
   width: var(--max-width);
   max-width: 100%;
+  place-items: center;
 }
 
 .card {
