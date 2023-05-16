@@ -919,7 +919,7 @@ export const BarbecueTokenABI = [
   }
 ]
 
-export const ExchangeAddress = "0xFf14175247918AA2FcA2179ca53f23E42c0Dd753"
+export const ExchangeAddress = "0xD194e051B253Cdbd2eF300a4b08EE370010b7463"
 export const ExchangeABI = [
   {
     "inputs": [

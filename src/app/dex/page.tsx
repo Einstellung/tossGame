@@ -1,5 +1,5 @@
 "use client"
-import { BigNumber, Contract, utils } from "ethers";
+import { BigNumber, Contract, providers, utils } from "ethers";
 import styles from "./style.module.scss"
 import { useConnectWallet } from "@/useHooks/useConnectWallet";
 import { ExchangeAddress, ExchangeABI, BarbecueTokenAddress, BarbecueTokenABI } from "@/constants";
@@ -12,6 +12,9 @@ function Exchange() {
 
   const [, getProviderOrSigner,] = useConnectWallet()
   const [bbqToETHRatio, setbbqToETHRatio] = useState<undefined | string>()
+  const [LPTotalAmount, setLPTotalAmount] = useState<undefined | string>()
+  const [userLPAmount, setUserLPAmount] = useState<undefined | string>()
+
 
   const [ethAddLiquidityAmount, setEthAddLiquidityAmount] = useState("")
   const [BBQAddLiquidityAmount, setBBQAddLiquidityAmount] = useState("")
@@ -37,6 +40,28 @@ function Exchange() {
       contract = new Contract(contractAdd, contractABI, provider);
     }
     return contract
+  }
+
+  const getLPTotalAmount = async () => {
+    try {
+      const exchangeContract = await providerOrSignerInst(ExchangeAddress, ExchangeABI);
+      const result = await exchangeContract.totalSupply()
+      setLPTotalAmount(tokenDecimal(result))
+    } catch(e) {
+      console.log("getLPAmount error", e)
+    }
+  }
+
+  const getUserLPAmount = async () => {
+    try {
+      const signer = await getProviderOrSigner(true) as providers.JsonRpcSigner;
+      const exchangeContract = await providerOrSignerInst(ExchangeAddress, ExchangeABI, true);
+
+      const result = await exchangeContract.balanceOf(signer.getAddress())
+      setUserLPAmount(tokenDecimal(result))
+    } catch(e) {
+      console.log("getUserLPAmount error", e)
+    }
   }
 
   const _getBarbecueToETHSwap = async (bbqAmount: string) => {
@@ -205,6 +230,8 @@ function Exchange() {
       if (val) {
         setbbqToETHRatio(val)
       }
+      getLPTotalAmount()
+      getUserLPAmount()
     }, 3000)
     return () => { clearInterval(interval) }
   }, [])
@@ -216,6 +243,8 @@ function Exchange() {
       if (val) {
         setbbqToETHRatio(val)
       }
+      getLPTotalAmount()
+      getUserLPAmount()
     }
     getRatio()
   }, [])
@@ -235,9 +264,12 @@ function Exchange() {
         <img src="./dex.jpeg" className={styles.image} />
       </div>
 
-      <p>Exchange Rate: 1 BBQ token = {bbqToETHRatio} ETH</p>
-      <p>LP Pool</p>
-      <p>Your LP Pool token amount</p>
+      <p className={styles.bbqToETHRatio}>Exchange Rate: 1 BBQ token = <strong>{bbqToETHRatio}</strong> ETH</p>
+      <p>LP Pool total amount: <strong>{LPTotalAmount}</strong></p>
+      {
+        userLPAmount && 
+        <p>Your LP Pool token amount is <strong>{userLPAmount}</strong> LP</p>
+      }
       <div className={styles.actions}>
         <div className={styles.liquidityStyle}>
           <div className={styles.liqui}>
