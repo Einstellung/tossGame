@@ -56,13 +56,24 @@
     align-items: center;
     margin-top: 50px;
 
+    .numberInput {
+      width: 100px;
+      height: 100%;
+      min-height: 33px;
+      text-align: center;
+      padding: 1%;
+      margin: 2%;
+      box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.06);
+      border-radius: 10px;
+      margin-right: 30px;
+    }
+
     select {
       border-radius: 7px;
       font-size: 15px;
       padding: 5px;
       width: 90px;
       cursor: pointer;
-      margin-bottom: 10px;
       margin-right: 40px;
     }
 
@@ -77,7 +88,6 @@
       border-radius: 4px;
       color: white;
       transition: background-color 0.3s ease;
-      margin-bottom: 10px;
       margin-right: 40px;
 
       &:hover {

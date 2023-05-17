@@ -1,4 +1,4 @@
-export const BarbecueNFTAddress = "0x32C2275828D19935D48f1d573C457f8E5FE2352B";
+export const BarbecueNFTAddress = "0x3b4493f4ce25a7b10f5aD015522082988a73B854";
 export const BarbecueNFTABI = [
   {
     "inputs": [],
@@ -486,7 +486,7 @@ export const BarbecueNFTABI = [
   }
 ]
 
-export const BarbecueTokenAddress = "0x6b4AB65E20C303FB8da2649de823e177176f0591"
+export const BarbecueTokenAddress = "0xe7538a9aB41a850fc9c5B668c82f03a3529bf96f"
 export const BarbecueTokenABI = [
   {
     "inputs": [
@@ -999,7 +999,7 @@ export const BarbecueTokenABI = [
   }
 ]
 
-export const ExchangeAddress = "0xe94cDf87CbE03FFfF6D5fd128a225173fE18a891"
+export const ExchangeAddress = "0x1b722c1eC6391019627514Ed12c43d33133deb2e"
 export const ExchangeABI = [
   {
     "inputs": [
@@ -1458,7 +1458,7 @@ export const ExchangeABI = [
   }
 ]
 
-export const Oracle = "0x0eb99B491685be1DFBE432124b65A1feC78D5B58"
+export const OracleAddress = "0xc13c3066f8a3e3be79E5e0D045d622BCF70C297D"
 export const OracleABI = [
   {
     "inputs": [
@@ -1533,6 +1533,50 @@ export const OracleABI = [
       }
     ],
     "name": "RequestRandomness",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "bytes32",
+        "name": "requestId",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "bool",
+        "name": "isHeads",
+        "type": "bool"
+      }
+    ],
+    "name": "TestRequestId",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "user",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      }
+    ],
+    "name": "TestTransfer",
     "type": "event"
   },
   {
