@@ -56,7 +56,7 @@ function HomePage() {
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.title}>Let's mint some Barbecue NFT 🎉</h1>
+      <h1 className={styles.title}>Let&apos; mint some Barbecue NFT 🎉</h1>
       <h1 className={styles.subtitle}>Total NFT supply is limited to 20 👀</h1>
       <div className={styles.info}>
         <p>If you own an NFT, you can receive a Barbecue Token airdrop</p>
