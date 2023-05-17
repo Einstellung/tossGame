@@ -486,13 +486,18 @@ export const BarbecueNFTABI = [
   }
 ]
 
-export const BarbecueTokenAddress = "0x5A97196FB66a028aEf5F3eb744a07b9C84F2F1F1"
+export const BarbecueTokenAddress = "0x6b4AB65E20C303FB8da2649de823e177176f0591"
 export const BarbecueTokenABI = [
   {
     "inputs": [
       {
         "internalType": "address",
         "name": "nftAddress",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "goldPricePrediction",
         "type": "address"
       }
     ],
@@ -567,6 +572,19 @@ export const BarbecueTokenABI = [
     ],
     "name": "Transfer",
     "type": "event"
+  },
+  {
+    "inputs": [],
+    "name": "addressOfGoldPricePrediction",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
   },
   {
     "inputs": [
@@ -649,6 +667,24 @@ export const BarbecueTokenABI = [
     "type": "function"
   },
   {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "user",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      }
+    ],
+    "name": "burnForPunishment",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
     "inputs": [],
     "name": "claimTokens",
     "outputs": [],
@@ -718,6 +754,19 @@ export const BarbecueTokenABI = [
   },
   {
     "inputs": [],
+    "name": "isOracleAddressSet",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
     "name": "maxTotalSupply",
     "outputs": [
       {
@@ -740,6 +789,24 @@ export const BarbecueTokenABI = [
     "name": "mint",
     "outputs": [],
     "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "user",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      }
+    ],
+    "name": "mintForReward",
+    "outputs": [],
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
@@ -784,6 +851,19 @@ export const BarbecueTokenABI = [
   {
     "inputs": [],
     "name": "renounceOwnership",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_oracle",
+        "type": "address"
+      }
+    ],
+    "name": "setOracleAddress",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -919,7 +999,7 @@ export const BarbecueTokenABI = [
   }
 ]
 
-export const ExchangeAddress = "0xD194e051B253Cdbd2eF300a4b08EE370010b7463"
+export const ExchangeAddress = "0xe94cDf87CbE03FFfF6D5fd128a225173fE18a891"
 export const ExchangeABI = [
   {
     "inputs": [
@@ -1374,6 +1454,199 @@ export const ExchangeABI = [
       }
     ],
     "stateMutability": "nonpayable",
+    "type": "function"
+  }
+]
+
+export const Oracle = "0x0eb99B491685be1DFBE432124b65A1feC78D5B58"
+export const OracleABI = [
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_vrfCoordinator",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "_linkToken",
+        "type": "address"
+      },
+      {
+        "internalType": "bytes32",
+        "name": "_keyHash",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_fee",
+        "type": "uint256"
+      },
+      {
+        "internalType": "address",
+        "name": "_barbecueToken",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "user",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "bool",
+        "name": "success",
+        "type": "bool"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      }
+    ],
+    "name": "PredictionResult",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "user",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "bytes32",
+        "name": "requestId",
+        "type": "bytes32"
+      }
+    ],
+    "name": "RequestRandomness",
+    "type": "event"
+  },
+  {
+    "inputs": [],
+    "name": "barbecueToken",
+    "outputs": [
+      {
+        "internalType": "contract IBarbecueToken",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "claimTokens",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bool",
+        "name": "isHeads",
+        "type": "bool"
+      },
+      {
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      }
+    ],
+    "name": "makePrediction",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "name": "predictions",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      },
+      {
+        "internalType": "bool",
+        "name": "isHeads",
+        "type": "bool"
+      },
+      {
+        "internalType": "bytes32",
+        "name": "randomnessRequestId",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "bool",
+        "name": "isResultReady",
+        "type": "bool"
+      },
+      {
+        "internalType": "bool",
+        "name": "success",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "requestId",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "uint256",
+        "name": "randomness",
+        "type": "uint256"
+      }
+    ],
+    "name": "rawFulfillRandomness",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "",
+        "type": "bytes32"
+      }
+    ],
+    "name": "requestIdToAddress",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
     "type": "function"
   }
 ]

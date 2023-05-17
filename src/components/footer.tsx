@@ -24,6 +24,13 @@ export const Footer = () => {
       </h2>
       <p>Decentralize exchange use Uniswap V1 AMM mechanism</p>
     </Link>
+
+    <Link href="/toss" className={styles.card}>
+      <h2>
+        Toss Game <span>-&gt;</span>
+      </h2>
+      <p>Stake BBQ coin and get rewards</p>
+    </Link>
   </div>
   )
 }
